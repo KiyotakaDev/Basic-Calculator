@@ -1,5 +1,5 @@
 import React from "react";
 
-export function OperatorBtn({ operator }) {
-  return <button>{operator}</button>;
+export function OperatorBtn({ operator, style }) {
+  return <button className={style}>{operator}</button>;
 }

@@ -1,5 +1,5 @@
 import React from "react";
 
-export function DigitBtn({ dig }) {
-  return <button className="bg-emerald-400">{dig}</button>;
+export function DigitBtn({ dig, style }) {
+  return <button className={style}>{dig}</button>;
 }

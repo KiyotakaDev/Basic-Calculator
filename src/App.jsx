@@ -4,7 +4,7 @@ import { OperatorBtn } from "./components/OperatorBtn";
 import { DigitBtn } from "./components/DigitBtn"
 
 function App() {
-  const { createDigits } = useContext(Context);
+  const { createDigits, operatorStyle, digitStyle, calc, result } = useContext(Context);
 
   /**
    * Styles: 
@@ -16,27 +16,28 @@ function App() {
 
 
   return (
-    <div className="App">
-      <div className="calculator">
-        <div className="display">
-          <span>(0)</span> 0
+    <div className="flex min-h-screen items-center justify-center p-4">
+      <div className="w-full max-w-[400px] bg-white rounded-[16px] overflow-hidden shadow-[0_2px_64px_rgba(0,0,0,0.2)]">
+        <div className="p-4 text-right bg-[#131a26] text-[#eee] text-2xl font-light">
+           { result ? <span className="text-sm text-[#888]">(0)</span> : "" }
+           { calc || "0"}
         </div>
 
-        <div className="operators">
-          <OperatorBtn operator="/"></OperatorBtn>
-          <OperatorBtn operator="*"></OperatorBtn>
-          <OperatorBtn operator="+"></OperatorBtn>
-          <OperatorBtn operator="-"></OperatorBtn>
+        <div className="flex">
+          <OperatorBtn operator="/" style={operatorStyle}></OperatorBtn>
+          <OperatorBtn operator="*" style={operatorStyle}></OperatorBtn>
+          <OperatorBtn operator="+" style={operatorStyle}></OperatorBtn>
+          <OperatorBtn operator="-" style={operatorStyle}></OperatorBtn>
 
-          <OperatorBtn operator="DEL"></OperatorBtn>
+          <OperatorBtn operator="DEL" style={operatorStyle}></OperatorBtn>
         </div>
 
-        <div className="digits">
+        <div className="flex flex-wrap">
           {createDigits()}
-          <DigitBtn dig="0"></DigitBtn>
-          <DigitBtn dig="."></DigitBtn>
+          <DigitBtn dig="0" style={digitStyle}></DigitBtn>
+          <DigitBtn dig="." style={digitStyle}></DigitBtn>
 
-          <DigitBtn dig="="></DigitBtn>
+          <DigitBtn dig="=" style={digitStyle}></DigitBtn>
         </div>
       </div>
     </div>
