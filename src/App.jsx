@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Context } from './context/Context'
 
 function App() {
+  const { createDigits } = useContext(Context)
+
   return (
-    <div>App</div>
+    <div>{createDigits()}</div>
   )
 }
 
