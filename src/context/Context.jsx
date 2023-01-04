@@ -3,26 +3,37 @@ import { DigitBtn } from "../components/DigitBtn";
 
 export const Context = createContext();
 
- /**
-   * Styles: 
-   * primary: #d81e5b
-   * secondary: #131a26
-   * dark: #131a26
-   * light: #eee
-   */
+/**
+ * Styles:
+ * primary: #d81e5b
+ * secondary: #131a26
+ * dark: #131a26
+ * light: #eee
+ */
 
 export function ContextProvider(props) {
   let operatorStyle = "flex-1 bg-[#d81e5b] font-bold";
   let digitStyle = "flex-[1_1_33.333%] max-w-[33.333] bg-[#131a26]";
 
-  const [calc, setCalc] = useState("")
-  const [result, setResult] = useState("")
+  const [calc, setCalc] = useState("");
+  const [result, setResult] = useState("");
 
-  const ops = ['/','*','+','-','.'];
+  const ops = ["/", "*", "+", "-", "."];
 
   const updateCalc = (value) => {
-    setCalc(calc + value)
-  }
+    if (
+      (ops.includes(value) && calc === "") ||
+      (ops.includes(value) && ops.includes(calc.slice(-1)))
+    ) {
+      return;
+    }
+
+    setCalc(calc + value);
+
+    if (!ops.includes(value)) {
+      setResult(eval(calc + value).toString());
+    }
+  };
 
   const createDigits = () => {
     const digits = [];
@@ -39,10 +50,26 @@ export function ContextProvider(props) {
     return digits;
   };
 
+  const calculate = () => {
+    setCalc(eval(calc).toString());
+  };
+
+  const deleteLast = () => {
+    if (calc == "") {
+      return;
+    }
+
+    const value = calc.slice(0, -1);
+    setCalc(value);
+  };
+
   return (
     <Context.Provider
       value={{
         createDigits,
+        updateCalc,
+        calculate,
+        deleteLast,
         operatorStyle,
         digitStyle,
         calc,

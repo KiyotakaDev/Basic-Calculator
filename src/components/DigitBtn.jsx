@@ -1,5 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../context/Context";
 
 export function DigitBtn({ dig, style }) {
-  return <button className={style}>{dig}</button>;
+  const { updateCalc } = useContext(Context);
+  return (
+    <button className={style} onClick={() => updateCalc(dig.toString())}>
+      {dig}
+    </button>
+  );
 }

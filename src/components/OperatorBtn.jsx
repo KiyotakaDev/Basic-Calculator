@@ -1,5 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../context/Context";
 
 export function OperatorBtn({ operator, style }) {
-  return <button className={style}>{operator}</button>;
+  const { updateCalc } = useContext(Context);
+  return (
+    <button className={style} onClick={() => updateCalc(operator)}>
+      {operator}
+    </button>
+  );
 }
